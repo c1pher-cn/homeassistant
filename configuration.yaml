@@ -1,0 +1,148 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: !secret hass_name
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude
+  longitude: !secret longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: !secret elevation
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: !secret timezone
+  # external files
+  customize: !include customize.yaml
+  packages: !include_dir_named packages
+
+# Show links to resources in log and frontend
+#introduction:
+
+# Enables the frontend
+frontend: 
+
+# Tack this on the end to load a frontend file
+#!include frontend.yaml
+
+# Enable iOS frontend
+ios:
+
+# Enables configuration UI
+config:
+
+http:
+  api_password: !secret http_password
+  server_host: "0.0.0.0"
+  base_url: !secret http_host
+  ssl_certificate: !secret http_certificate
+  ssl_key: !secret http_key
+  trusted_networks: !secret trusted_networks
+  ip_ban_enabled: True
+  login_attempts_threshold: 1
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Use MariaDB Add-on for Database
+recorder:
+#  db_url: !secret mysql_uri
+
+# Enable logging
+logger:
+  default: warn
+  #default: critical
+  logs:
+    homeassistant.components.media_player.tts_bluetooth_speaker: info
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+# Text to speech
+tts:
+    #- platform: google
+  - platform: baidu
+    app_id: !secret BAIDU_APPID
+    api_key: !secret BAIDU_KEY
+    secret_key: !secret BAIDU_SEC
+# Home Assistant Cloud
+cloud:
+
+weblink:
+  entities:
+    - name: Home Assistant Webpage
+      url: https://home-assistant.io/
+    - name: Home Assistant Forum
+      url: https://community.home-assistant.io/
+
+################################################################################
+# Core Components
+################################################################################
+dlna:
+
+switch:
+  - platform: broadlink
+    host: !secret BROADLINK_IP
+    mac: !secret BROADLINK_MAC
+    #type: rm2_pro_plus
+    switches:
+      tmall:
+        friendly_name: "call Tmall" 
+        command_on: 'JgBQAAABKJUTEhMTEhMTExITEhQRExMTEzcTNxM3EzcTNxQSEhMSOBQSEjgTNxMTExISFBE4EhMTNxQSEhMTNxQ3EzcSExI4FAAFZwABKkkTAA0FAAAAAAAAAAA='    
+        command_off: 'JgBQAAABKJUTEhMTEhMTExITEhQRExMTEzcTNxM3EzcTNxQSEhMSOBQSEjgTNxMTExISFBE4EhMTNxQSEhMTNxQ3EzcSExI4FAAFZwABKkkTAA0FAAAAAAAAAAA='    
+media_player:
+  - platform: braviatv
+    host: !secret BRAVIA_IP
+ # - platform: tts_bluetooth_speaker
+    # address: B8:69:C2:16:B1:6D    # Required - for example, 00:2F:AD:12:0D:42
+    # volume: 0.45                   # Optional - default is 0.5
+  - platform: mpd
+    host: 127.0.0.1
+xiaomi_aqara:
+  discovery_retry: 5
+  gateways:
+    - key: !secret XIAOMI_KEY
+      mac: !secret XIAOMI_MAC
+camera:
+  - platform: ezviz
+    name: ezviz-yuquan
+    id: !secret EZVIZ_YUQUAN
+    key: !secret EZVIZ_KEY
+    sec: !secret EZVIZ_SEC
+  
+  - platform: ezviz
+    name: ezviz-xixi
+    id: !secret EZVIZ_XIXI
+    key: !secret EZVIZ_KEY
+    sec: !secret EZVIZ_SEC
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+#zone: !include zones.yaml
+sensor: !include sensors.yaml
+#binary_sensor: !include binary_sensors.yaml
+#device_tracker: !include device_tracker.yaml
+device_tracker:
+  - platform: bluetooth_tracker
+#light: !include lights.yaml
+#scene: !include scenes.yaml
+#weather: !include weather.yaml

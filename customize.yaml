@@ -1,0 +1,27 @@
+media_player.f7ca54543f48439080092834e14fc4a7:
+  friendly_name: 天猫墨盒DLNA
+media_player.5f31df9168c00d4972969c6b04ed95f0:
+  friendly_name: 电视DLNA
+climate.ac_livingroom:
+  friendly_name: 客厅空调
+sensor.lmh_iphone_battery_level:
+  friendly_name: iphone6点亮
+sensor.lmh_iphone_battery_state:
+  friendly_name: iphone6电池状态
+sensor.date:
+  friendly_name: 日期
+sensor.date__time:
+  friendly_name: 日期&时间
+sensor.time_utc:
+  friendly_name: 时间
+sensor.internet_time:
+  friendly_name: 互联网时间
+sensor.temperature_158d0001712cbf:
+  friendly_name: 小米温度
+sensor.humidity_158d0001712cbf:
+  friendly_name: 小米湿度
+sensor.illumination_34ce008dc8c3:
+  friendly_name: 餐厅亮度
+sensor.illumination_158d0001e55ea0:
+  friendly_name: 厨房亮度
+switch.tmall: {}

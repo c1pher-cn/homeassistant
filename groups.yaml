@@ -1,0 +1,74 @@
+#  home:
+ #   view: yes
+ #   icon: mdi:home
+ #   entities:
+ #     - group.persons
+ #     - group.devices
+ #     - group.rooms
+ #     - group.climate
+  persons:
+    view: yes
+    icon: mdi:account-multiple
+    entities:
+      - sensor._iphone_battery_level_2
+      - sensor._iphone_battery_state_2
+  rooms:
+    view: yes
+    icon: mdi:room-service
+    entities:
+      - group.beedroom1
+      - group.bookroom
+      - group.livingroom
+      - group.bathroom
+      - group.diningroom
+      - group.kitchen
+  livingroom:
+    icon: mdi:room-service
+    entities:
+      - switch.wall_switch_left_158d000216afc1
+      - switch.wall_switch_right_158d000216afc1
+      - switch.wall_switch_right_158d00022bc3a7
+      - climate.ac_livingroom
+  bookroom:
+    icon: mdi:room-service
+    entities:
+      - switch.wall_switch_left_158d00022354b1
+      - switch.wall_switch_right_158d00022354b1
+  bathroom:
+    icon: mdi:room-service
+    entities:
+      - switch.wall_switch_left_158d000215287e
+      - switch.wall_switch_right_158d000215287e
+      - binary_sensor.motion_sensor_158d0001d920c2
+  kitchen:
+    icon: mdi:room-service
+    entities:
+      - switch.wall_switch_158d00022eb3f1
+      - sensor.illumination_158d0001e55ea0
+      - binary_sensor.motion_sensor_158d0001e55ea0
+      - binary_sensor.water_leak_sensor_158d00023a6486
+  diningroom:
+    icon: mdi:room-service
+    entities:
+      - switch.wall_switch_left_158d00022bc3a7
+      - binary_sensor.motion_sensor_158d000121c2c4
+      - sensor.illumination_34ce008dc8c3
+      - light.gateway_light_34ce008dc8c3
+      - binary_sensor.door_window_sensor_158d000121cbb6
+  devices:
+    view: yes
+    icon: mdi:desktop-mac
+    entities:
+      - media_player.sony_bravia_tv
+      - media_player.f7ca54543f48439080092834e14fc4a7 
+      - media_player.5f31df9168c00d4972969c6b04ed95f0
+  climate:
+    view: yes
+    icon: mdi:weather-sunset
+    entities:
+      - sun.sun
+      - sensor.time
+      - sensor.date
+      - sensor.date__time
+      - sensor.internet_time
+      - sensor.time_utc 

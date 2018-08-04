@@ -1,0 +1,74 @@
+sensor:
+#Custom UI
+  - platform: PhicommAirDetector
+    name: m1
+    phicommAccount : '17098070604'
+    phicommPassowrd: '24157518'
+    airDetectorMac: 'B0:F8:93:11:CB:32'
+#Custom UI End
+  - platform: template
+    sensors:
+      m1_pm25:
+        friendly_name: 空气质量
+        value_template: "{{ states.sensor.m1.attributes.pm25 }}"
+        unit_of_measurement: μg/m³
+      m1_hcho:
+        friendly_name: 甲醛
+        value_template: "{{ states.sensor.m1.attributes.hcho }}"
+        unit_of_measurement: mg/m³
+      m1_temperature:
+        friendly_name: 温度
+        value_template: "{{ states.sensor.m1.attributes.temperature }}"
+        unit_of_measurement: °C
+      m1_humidity:
+        friendly_name: 湿度
+        value_template: "{{ states.sensor.m1.attributes.humidity }}"
+        unit_of_measurement: "%"
+
+
+input_number:
+  phicomm_m1_led:
+    name: 屏幕亮度
+    icon: mdi:led-on
+    initial: 50
+    min: 0
+    max: 50
+    step: 25
+
+input_boolean:
+  phicomm_m1_reset:
+    name: 重试
+    icon: mdi:lock-reset
+    initial: false
+      
+group:
+  m1:
+    name: 空气检测仪M1
+    view: no
+#Custom UI
+#    entities:
+#      - input_number.phicomm_m1_led
+#      - input_boolean.phicomm_m1_reset
+#      - sensor.m1
+#Custom UI End
+    entities:
+      - sensor.m1_temperature
+      - sensor.m1_humidity
+      - sensor.m1_pm25
+      - sensor.m1_hcho
+      - input_number.phicomm_m1_led
+      - input_boolean.phicomm_m1_reset
+
+
+homeassistant:
+  customize:
+    sensor.m1_humidity:
+      icon: mdi:water-percent
+    sensor.m1_pm25:
+      icon: mdi:blur
+#Custom UI
+#    sensor.m1:
+#      custom_ui_state_card: state-card-custom-phicomm-aircat
+#Custom UI End
+
+

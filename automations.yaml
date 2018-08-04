@@ -1,0 +1,93 @@
+  - alias: callup_tmall  #####单击#######
+    trigger:
+    - platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d0001226d0a
+        click_type: single  
+    action:
+      - service: switch.toggle
+        entity_id: switch.tmall
+  
+  - alias: bath_open
+    trigger:
+    - entity_id: binary_sensor.motion_sensor_158d0001d920c2
+      from: 'off'
+      platform: state
+      to: 'on'
+    condition: []
+    action:
+      - service: switch.turn_on
+        entity_id: switch.wall_switch_left_158d000215287e
+
+  - alias: bath_close
+    initial_state: true
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.motion_sensor_158d0001d920c2
+        from: 'on'
+        to: 'off'
+        for:
+          minutes: 10
+    action:
+      - service: switch.turn_off
+        entity_id: switch.wall_switch_left_158d000215287e
+
+
+  - alias: kitchen_open
+    initial_state: true
+    trigger:
+    - entity_id: binary_sensor.motion_sensor_158d0001e55ea0
+      from: 'off'
+      platform: state
+      to: 'on'
+    condition: 
+      - condition: numeric_state
+        entity_id: sensor.illumination_158d0001e55ea0
+        value_template: '{{ states.sensor.illumination_158d0001e55ea0.state| int }}'
+        below: 10
+    action:
+      - service: switch.turn_on
+        entity_id: switch.wall_switch_158d00022eb3f1
+
+  - alias: kitchen_off
+    initial_state: true
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.motion_sensor_158d0001e55ea0
+        from: 'on'
+        to: 'off'
+        for:
+          minutes: 10
+    action:
+      - service: switch.turn_off
+        entity_id: switch.wall_switch_158d00022eb3f1
+  
+  - alias: diving_open
+    initial_state: true
+    trigger:
+    - entity_id: binary_sensor.motion_sensor_158d000121c2c4 
+      from: 'off'
+      platform: state
+      to: 'on'
+    condition: 
+      - condition: numeric_state
+        entity_id: sensor.illumination_34ce008dc8c3
+        value_template: '{{ states.sensor.illumination_34ce008dc8c3.state| int }}'
+        below: 100
+    action:
+      - service: switch.turn_on
+        entity_id: switch.wall_switch_left_158d00022bc3a7
+
+  - alias: diving_off
+    initial_state: true
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.motion_sensor_158d000121c2c4
+        from: 'on'
+        to: 'off'
+        for:
+          minutes: 10
+    action:
+      - service: switch.turn_off
+        entity_id: switch.wall_switch_left_158d00022bc3a7
