@@ -1,0 +1,42 @@
+  camerayuquan:
+    alias: Take_a_picture_yuquan
+    sequence:
+      # This is Home Assistant Script Syntax
+      - service: camera.snapshot
+        data_template:
+          entity_id: camera.ezvizyuquan
+          filename: !secret YUQUAN_LOCAL_FILE
+      - delay:
+          seconds: 2
+      - service: notify.ios_liumingyu_iphone
+        data:
+          message: >
+            点击查看摄像头内容
+          title: '抓拍'  
+          data:
+            attachment:
+              url: !secret YUQUAN_INTERNET_FILE
+              content-type: jpg
+              hide-thumbnail: false
+
+
+  cameraxixi:
+    alias: Take_a_picture_xixi
+    sequence:
+      # This is Home Assistant Script Syntax
+      - service: camera.snapshot
+        data_template:
+          entity_id: camera.ezvizxixi
+          filename: !secret XIXI_LOCAL_FILE
+      - delay:
+          seconds: 2
+      - service: notify.ios_liumingyu_iphone
+        data:
+          message: >
+            点击查看摄像头内容
+          title: '抓拍'  
+          data:
+            attachment:
+              url: !secret XIXI_INTERNET_FILE
+              content-type: jpg
+              hide-thumbnail: false
